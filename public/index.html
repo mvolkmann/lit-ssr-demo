@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Lit SSD Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <script type="module" src="lit-components.js"></script>
+    <!-- TODO: Is there a way you can use this instead of the above?-->
+    <!-- <script type="module" src="components/hello-world.js"></script> -->
+
+    <script type="module">
+      const greetBtn = document.getElementById("greet-btn");
+      greetBtn.addEventListener("click", async () => {
+        const res = await fetch("/hello-world?name=Mark");
+        const html = await res.text();
+        greetBtn.insertAdjacentHTML("afterend", html);
+      });
+    </script>
+  </head>
+  <body>
+    <p>The following are client-side rendered Lit components.</p>
+    <hello-world></hello-world>
+    <hello-world name="Mark"></hello-world>
+
+    <button id="greet-btn">Greet</button>
+  </body>
+</html>

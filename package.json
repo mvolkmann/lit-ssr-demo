@@ -1,0 +1,21 @@
+{
+  "name": "ssr-demo",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "@lit-labs/ssr": "^3.3.1",
+    "@lit-labs/ssr-client": "^1.1.7",
+    "hono": "^4.10.5",
+    "lit": "^3.3.1"
+  }
+}
