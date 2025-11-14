@@ -8,7 +8,12 @@ import { RenderResultReadable } from "@lit-labs/ssr/lib/render-result-readable.j
 //import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 
 import "./public/components/hello-world.js";
-//TODO: When this import is used instead of the previous one,
+//TODO:
+// The file "./public/lit-components.js" was created
+// by running `npm run build` in another project.
+// It contains the built code for the same component
+// found in "./public/components/hello-world.js".
+// When the import below is used instead of the previous one,
 // we get the following error in the server:
 // ReferenceError: document is not defined
 //import "./public/lit-components.js";
