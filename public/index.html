@@ -11,6 +11,7 @@
     found in "./public/components/hello-world.js".
     -->
     <script type="module" src="lit-components.js"></script>
+    <!-- <script type="module" src="./components/hello-world.js"></script> -->
 
     <!--
     TODO: Is there a way we can use this script element instead of the above?
@@ -39,6 +40,13 @@
         const res = await fetch("/hello-world?name=Mark");
         const html = await res.text();
         insertHTML(html, greetBtn);
+        //document.getElementById("greetings").setHTMLUnsafe(html);
+        //document.getElementById("greetings").innerHTML = html;
+        /*
+        const container = document.createElement("div");
+        container.innerHTML = html;
+        greetBtn.after(container);
+        */
       });
     </script>
   </head>
@@ -48,5 +56,6 @@
     <hello-world name="Mark"></hello-world>
 
     <button id="greet-btn">Greet</button>
+    <div id="greetings"></div>
   </body>
 </html>
