@@ -18,11 +18,27 @@
     -->
 
     <script type="module">
+      // Inserting HTML that describes a server-rendered web component
+      // into the DOM by setting the innerHTML property or
+      // calling the Element method insertAdjacentHTML results in the
+      // error message "Found declarative shadowrootmode attribute on
+      // a template, but declarative Shadow DOM is not being parsed".
+      // This function provides an alternative that avoids that.
+      function insertHTML(html, target) {
+        const parser = new DOMParser();
+        const source = parser.parseFromString(html, "text/html");
+        const fragment = document.createDocumentFragment();
+        while (source.firstChild) {
+          fragment.appendChild(source.firstChild);
+        }
+        target.after(fragment);
+      }
+
       const greetBtn = document.getElementById("greet-btn");
       greetBtn.addEventListener("click", async () => {
         const res = await fetch("/hello-world?name=Mark");
         const html = await res.text();
-        greetBtn.insertAdjacentHTML("afterend", html);
+        insertHTML(html, greetBtn);
       });
     </script>
   </head>
