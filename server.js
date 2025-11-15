@@ -40,4 +40,6 @@ app.get("/hello-world", async (c) => {
   //return c.html(newContent);
 });
 
-serve(app);
+serve(app, (info) => {
+  console.log(`listing on port ${info.port}`);
+});
