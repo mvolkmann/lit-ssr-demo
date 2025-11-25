@@ -2,10 +2,11 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2020", "dom"],
-    "module": "es2020",
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
-    "target": "es2020"
+    "target": "esnext",
+    "useDefineForClassFields": false
   }
 }
