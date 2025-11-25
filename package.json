@@ -1,21 +1,23 @@
 {
-  "name": "ssr-demo",
-  "module": "index.ts",
+  "name": "lit-app",
+  "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "node --watch server.js"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "clean": "rm -rf dist",
+    "build:client": "vite build",
+    "build:server": "vite build --config vite.config.server.ts",
+    "build": "npm run build:client && npm run build:server",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.6",
     "@lit-labs/ssr": "^3.3.1",
-    "@lit-labs/ssr-client": "^1.1.7",
     "hono": "^4.10.5",
-    "lit": "^3.3.1"
+    "lit": "^3.2.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.9"
   }
 }

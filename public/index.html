@@ -1,61 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Lit SSD Demo</title>
-    <link rel="stylesheet" href="styles.css" />
-
-    <!--
-    The file "./public/lit-components.js" was created
-    by running `npm run build` in another project.
-    It contains the built code for the same component
-    found in "./public/components/hello-world.js".
-    -->
-    <script type="module" src="lit-components.js"></script>
-    <!-- <script type="module" src="./components/hello-world.js"></script> -->
-
-    <!--
-    TODO: Is there a way we can use this script element instead of the above?
-    <script type="module" src="components/hello-world.js"></script>
-    -->
-
+    <title>Lit SSR Demo</title>
+    <script type="module" src="./client.js"></script>
     <script type="module">
-      // Inserting HTML that describes a server-rendered web component
-      // into the DOM by setting the innerHTML property or
-      // calling the Element method insertAdjacentHTML results in the
-      // error message "Found declarative shadowrootmode attribute on
-      // a template, but declarative Shadow DOM is not being parsed".
-      // This function provides an alternative that avoids that.
-      function insertHTML(html, target) {
-        const parser = new DOMParser();
-        const source = parser.parseFromString(html, "text/html");
-        const fragment = document.createDocumentFragment();
-        while (source.firstChild) {
-          fragment.appendChild(source.firstChild);
-        }
-        target.after(fragment);
-      }
-
-      const greetBtn = document.getElementById("greet-btn");
-      greetBtn.addEventListener("click", async () => {
-        const res = await fetch("/hello-world?name=Mark");
+      const button = document.querySelector("button");
+      button.addEventListener("click", async () => {
+        const res = await fetch("http://localhost:3000/greet?name=Mark");
         const html = await res.text();
-        insertHTML(html, greetBtn);
-        //document.getElementById("greetings").setHTMLUnsafe(html);
-        //document.getElementById("greetings").innerHTML = html;
-        /*
-        const container = document.createElement("div");
-        container.innerHTML = html;
-        greetBtn.after(container);
-        */
+
+        // With this approach, Chrome complains that
+        // "Found declarative shadowrootmode attribute on a template,
+        // but declarative Shadow DOM is not being parsed.",
+        // but it still works.
+        button.insertAdjacentHTML("afterend", html);
+
+        // With this approach, each custom element is rendered twice.
+        //const greet = document.querySelector("#greet");
+        //greet.setHTMLUnsafe(html);
       });
     </script>
   </head>
   <body>
-    <p>The following are client-side rendered Lit components.</p>
+    <p>The following components are client-side rendered:</p>
     <hello-world></hello-world>
     <hello-world name="Mark"></hello-world>
 
-    <button id="greet-btn">Greet</button>
-    <div id="greetings"></div>
+    <button>Greet</button>
+    <div id="greet"></div>
   </body>
 </html>
