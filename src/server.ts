@@ -7,7 +7,7 @@ import { render } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
 //import { RenderResultReadable } from "@lit-labs/ssr/lib/render-result-readable.js";
 
-import "../components/hello-world.ts";
+import "./hello-world.js";
 
 const app = new Hono();
 

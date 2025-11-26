@@ -9,7 +9,7 @@ export default defineConfig({
 
     rollupOptions: {
       input: {
-        server: "server/server.ts",
+        server: "src/server.ts",
       },
       output: {
         // Default is "assets/{name}-{hash}.js" which we do not want.
