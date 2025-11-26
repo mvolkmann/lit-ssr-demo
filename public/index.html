@@ -4,11 +4,13 @@
     <title>Lit SSR Demo</title>
     <script type="module" src="./client.js"></script>
     <script type="module">
+      // Get HTML from the greet endpoint.
       const button = document.querySelector("button");
       button.addEventListener("click", async () => {
         const res = await fetch("http://localhost:3000/greet?name=Mark");
         const html = await res.text();
 
+        // Insert the HTML after the Greet button.
         // With this approach, Chrome complains that
         // "Found declarative shadowrootmode attribute on a template,
         // but declarative Shadow DOM is not being parsed.",

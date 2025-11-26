@@ -13,7 +13,7 @@ const app = new Hono();
 
 app.use("/*", serveStatic({ root: "./dist" }));
 
-// This returns a server-side rendered Lit component.
+// This returns HTML that includes server-side rendered Lit components.
 app.get("/greet", async (c: Context) => {
   const name = c.req.query("name");
   const template = html`
@@ -21,10 +21,13 @@ app.get("/greet", async (c: Context) => {
     <hello-world></hello-world>
     <hello-world name=${name}></hello-world>
   `;
-  const result = render(template);
-
-  const newContent = await collectResult(result);
-  return c.html(newContent);
+  // Generate a stream of HTML from the template
+  // that uses Declarative Shadow DOM.
+  const stream = render(template);
+  // Combine chunks of HTML from the stream into a string.
+  const string = await collectResult(stream);
+  // Send an HTTP response containing the HTML string.
+  return c.html(string);
 
   // This is an alternative to the previous two lines
   // that streams the response.
