@@ -5,6 +5,7 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { html } from "lit";
 import { render } from "@lit-labs/ssr";
 import { collectResult } from "@lit-labs/ssr/lib/render-result.js";
+//import { RenderResultReadable } from "@lit-labs/ssr/lib/render-result-readable.js";
 
 import "../components/hello-world.ts";
 
@@ -21,8 +22,14 @@ app.get("/greet", async (c: Context) => {
     <hello-world name=${name}></hello-world>
   `;
   const result = render(template);
+
   const newContent = await collectResult(result);
   return c.html(newContent);
+
+  // This is an alternative to the previous two lines
+  // that streams the response.
+  //const stream = new RenderResultReadable(result);
+  //return new Response(stream as unknown as BodyInit);
 });
 
 serve(app, (info) => {
