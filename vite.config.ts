@@ -1,4 +1,5 @@
 // This is used to compile client-side code.
+// It also copies public/index.html to the dist directory.
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -9,7 +10,7 @@ export default defineConfig({
 
     rollupOptions: {
       input: {
-        client: "src/hello-world.ts",
+        "hello-world": "src/hello-world.ts",
       },
       output: {
         // Default is "assets/{name}-{hash}.js" which we do not want.
